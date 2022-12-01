@@ -4,18 +4,19 @@ import Header from './components/payroll_form/Header';
 import {BrowserRouter as Router, Route , Switch} from 'react-router-dom'
 import Home from './components/home/Home';
 
-
 function App() {
   return (
-    <>
-    <Header/>
-    <Router>
+    <div >
+      <Header />
+      <Router>
         <Switch>
-          <Route path="/payroll-form"><PayrollForm /></Route>
-          <Route path="/home"><Home /></Route>
+          <Route path="/payroll-form" component={PayrollForm}></Route>
+          <Route path="/home" component={Home}></Route>
         </Switch>
       </Router>
-    </>
+      
+    </div>
   );
 }
+
 export default App;

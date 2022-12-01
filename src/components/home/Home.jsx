@@ -4,7 +4,9 @@ import addIcon from '../../assets/images/add-24px.svg'
 import editIcon from '../../assets/images/create-black-18dp.svg';
 import deleteIcon from '../../assets/images/delete-black-18dp.svg';
 import EmployeeService from '../../service/EmployeeService';
- 
+import { Link  } from 'react-router-dom'
+
+
 class Home extends Component {
 
     constructor(props){
@@ -14,6 +16,10 @@ class Home extends Component {
             employeeList : [],
         }
     }
+    updateEmployee = (employeeId) => {
+        console.log("update id : "+ employeeId);
+        this.props.history.push('payroll-form',employeeId={employeeId})
+    };
     deleteEmployee = (employeeId) => {
         let empId = parseInt(employeeId)
         EmployeeService.deleteEmployee(empId);
@@ -58,12 +64,13 @@ class Home extends Component {
                     <table id="table-display" className="table">
                         
                         <tr>
-                            <th></th>
+                            <th>Profile</th>
                             <th>Name</th>
                             <th>Gender</th>
                             <th>Department</th>
                             <th>Salary</th>
                             <th>Start Date</th>
+                            <th>Notes</th>
                             <th>Actions</th>
                         </tr>
                         
@@ -85,10 +92,12 @@ class Home extends Component {
                                     
                                     <td>{employee.salary}</td>
 									<td>{employee.startDate}</td>
+                                    <td>{employee.note}</td>
+
 
                                     <td>
                                         <img id={employee.id} 
-                                        onClick={() => this.updateEmployee(employee.employeeId)} src={editIcon} alt="edit"/>                                       
+                                        onClick={() => this.updateEmployee(employee.id)} src={editIcon} alt="edit"/>                                       
                                         <img id={employee.id} onClick={() => this.deleteEmployee(employee.id)} src={deleteIcon} alt="delete"/>
                                     </td>
                                     
